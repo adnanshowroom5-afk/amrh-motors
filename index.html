@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TVS Showroom - NTORQ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #e4002b 0%, #b3001e 100%);
+            color: white;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            animation: fadeIn 1s ease;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            margin-left: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: auto;
+            background: #fff;
+            padding: 5px;
+            border-radius: 8px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1629318727475-94282aa5f5c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 5%;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: slideUp 1s ease;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 30px;
+            animation: slideUp 1.2s ease;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #e4002b;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid #e4002b;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .btn:hover {
+            background: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-whatsapp {
+            background: #25D366;
+            border-color: #25D366;
+            margin-left: 15px;
+        }
+        
+        .features {
+            padding: 80px 5%;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #e4002b;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #e4002b;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: #e4002b;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .bike-showcase {
+            padding: 80px 5%;
+            background: #f1f3f6;
+            text-align: center;
+        }
+        
+        .bike-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+        
+        .bike-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.8s ease;
+        }
+        
+        .bike-image.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .bike-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: all 0.5s ease;
+        }
+        
+        .bike-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .bike-details {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+            padding: 20px;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.8s ease;
+        }
+        
+        .bike-details.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .bike-details h2 {
+            font-size: 2.2rem;
+            color: #e4002b;
+            margin-bottom: 20px;
+        }
+        
+        .specs {
+            margin: 20px 0;
+        }
+        
+        .specs li {
+            margin-bottom: 10px;
+            list-style: none;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .specs li::before {
+            content: '➤';
+            color: #e4002b;
+            position: absolute;
+            left: 0;
+        }
+        
+        .contact {
+            padding: 80px 5%;
+            text-align: center;
+            background: linear-gradient(135deg, #e4002b 0%, #b3001e 100%);
+            color: white;
+        }
+        
+        .contact .section-title {
+            color: white;
+        }
+        
+        .contact .section-title::after {
+            background: white;
+        }
+        
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-content p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        footer {
+            background: #222;
+            color: #fff;
+            padding: 40px 5%;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: #e4002b;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: #e4002b;
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                margin-bottom: 10px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <div class="logo-img">AMRH</div>
+            <div class="logo-text">TVS SHOWROOM</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#showcase">NTORQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Experience the Thrill of TVS NTORQ</h1>
+        <p>Discover the perfect blend of style, performance, and technology with the TVS NTORQ. Visit our showroom for a test ride today!</p>
+        <div>
+            <a href="#contact" class="btn">Book a Test Ride</a>
+            <a href="https://chat.whatsapp.com/F0uyKZ2my8z06BMvIOWZWo" class="btn btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Join WhatsApp Group</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">Why Choose TVS NTORQ</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <h3>Powerful Performance</h3>
+                <p>124.8cc engine delivering exceptional power and acceleration for an exhilarating ride.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Advanced Features</h3>
+                <p>Digital console, LED headlamps, smartphone connectivity, and fully digital instrument cluster.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Safety First</h3>
+                <p>Equipped with petal disc brakes and TVS Anti-Lock Braking System for superior control.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bike Showcase -->
+    <section class="bike-showcase" id="showcase">
+        <h2 class="section-title">TVS NTORQ 125</h2>
+        <div class="bike-container">
+            <div class="bike-image">
+                <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2064&q=80" alt="TVS NTORQ 125">
+            </div>
+            <div class="bike-details">
+                <h2>Superior Performance & Style</h2>
+                <p>The TVS NTORQ 125 is designed for those who seek performance, style, and technology in one package. With its race-inspired design and cutting-edge features, it stands out in the crowd.</p>
+                <div class="specs">
+                    <h3>Key Specifications:</h3>
+                    <ul>
+                        <li>124.8cc Single Cylinder Engine</li>
+                        <li>10.5 BHP @ 8500 RPM</li>
+                        <li>10.5 Nm Torque @ 6500 RPM</li>
+                        <li>Fuel Injection System</li>
+                        <li>5.8 Liters Fuel Tank Capacity</li>
+                        <li>Digital Instrument Cluster</li>
+                        <li>Smartphone Connectivity</li>
+                    </ul>
+                </div>
+                <a href="#contact" class="btn">Enquire Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+            <p>Visit our showroom for a test ride or contact us for more information about the TVS NTORQ and other models.</p>
+            <a href="https://chat.whatsapp.com/F0uyKZ2my8z06BMvIOWZWo" class="btn btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Enquiry</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>TVS Showroom</h3>
+                <p>Your trusted partner for quality TVS vehicles and service.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Address: bengluru,karnataka </p>
+                <p>Phone: +91 89047 74552</p>
+                <p>Email: rohangowdar172@gmail.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 TVS Showroom. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const featureCards = document.querySelectorAll('.feature-card');
+            const bikeImage = document.querySelector('.bike-image');
+            const bikeDetails = document.querySelector('.bike-details');
+            
+            // Check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+            
+            // Add visible class when in viewport
+            function checkVisibility() {
+                featureCards.forEach(card => {
+                    if (isInViewport(card)) {
+                        card.classList.add('visible');
+                    }
+                });
+                
+                if (isInViewport(bikeImage)) {
+                    bikeImage.classList.add('visible');
+                }
+                
+                if (isInViewport(bikeDetails)) {
+                    bikeDetails.classList.add('visible');
+                }
+            }
+            
+            // Initial check
+            checkVisibility();
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkVisibility);
+        });
+    </script>
+</body>
+</html>
